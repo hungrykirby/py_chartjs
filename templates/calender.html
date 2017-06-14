@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+<div class="form">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="calender"></div>
+        <canvas id="graph-area" width="600" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <script type="text/javascript" src="/static/js/calender.js"></script> -->
+<script>
+$(document).ready(function() {
+  var ds = [{% for item in colored_day %}
+            "{{item}}",
+        {% endfor %}];
+  //console.log(colored_day);
+  $('#calender').fullCalendar({
+    dayClick: function(date, jsEvent, view) {
+      /*alert('Clicked on: ' + date.format());
+      alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+      alert('Current view: ' + view.name);*/
+        // change the day's background color just for fun
+      $(this).css('background-color', 'red');
+      $("#graph-area").toggle();
+    },
+    dayRender: function (date, cell) {
+
+      console.log(ds);
+      for(var i = 0; i < ds.length; i++){
+        //console.log(i);
+        if(date.format() == ds[i]){
+          cell.css("background-color", "yellow");
+
+        }
+      }
+      //console.log(date.getDate());
+    }
+  });
+});
+
+var cal_Data = {
+  labels : [{% for item in labels %}
+            "{{item}}",
+        {% endfor %}],
+  datasets : [{
+    label: 'Sample',
+    backgroundColor:[
+      "aqua",
+      "blue",
+      "fuchsia",
+      "green",
+      "maroon",
+      "olive",
+      "teal",
+      "yellow"
+    ],
+    data : [{% for item in values %}
+                  {{item}},
+                {% endfor %}]
+  }]
+}
+var cal_mychart = document.getElementById("graph-area");
+var cal_chart = new Chart(cal_mychart, {
+  type:'doughnut',
+  data:cal_Data
+});
+</script>
+{% endblock %}

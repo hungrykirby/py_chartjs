@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+<div class="form">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="lead">
+          {% if name %}
+            こんにちは {{ name }} さん
+          {% else %}
+            {{ message }}
+          {% endif %}
+        </p>
+        <form action="/post" method="post" class="form-inline">
+          <label for="name">名前</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+          <button type="submit" class="btn btn-default">送信する</button>
+        </form>
+
+        <form action="/display" method="post" class="graph-display">
+          <button type="submit" class="btn btn-default">グラフを描画する</button>
+        </form>
+
+        <form action="/calender" method="post" class="calender-display">
+          <button type="submit" class="btn btn-default">calenderを描画する</button>
+        </form>
+
+        <form action="/test" method="post" class="test">
+          <button type="submit" class="btn btn-default">Test</button>
+        </form>
+
+        <label for="name">名前</label>
+        <input type="text" class="form-control" id="input-text" name="text" placeholder="Name">
+        <button class="btn btn-default" id="button" onclick="click_event()">Change text</button>
+
+        <div id="hello"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

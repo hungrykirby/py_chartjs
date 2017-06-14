@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+<div class="form">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="lead">
+          {% if name %}
+            こんにちは {{ name }} さん
+          {% else %}
+            {{ message }}
+          {% endif %}
+        </p>
+        <canvas id="chart2"></canvas>
+        <div id="calender"></div>
+        <script src="{{ url_for('static', filename='js/test.js') }}"></script>
+        <script>
+          my_func({{ ResultSet|tojson }});
+          my_cal({{ CalSet|tojson }})
+        </script>
+        </div>
+        <div id="receive">
+          {% for c in b %}
+            <p>{{c}}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
