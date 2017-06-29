@@ -39,6 +39,21 @@ def post():
     else:
         return redirect(url_for('index'))
 
+@app.route('/action', methods=['POST'])
+def arrange_form_nums():
+    title = "yeah!"
+    return render_template('forms.html', title=title)
+
+@app.route('/regist', methods=['POST'])
+def regist_form():
+    title = "yeah!"
+    favs = request.form.getlist("selectitems")
+    #favs =  request.form.get('selectitems')
+    print("favs:", favs)
+    #return render_template('forms.html', title=title)
+    return render_template('forms.html', title=title)
+    #return redirect(url_for('arrange_form_nums'))
+
 @app.route('/display', methods=['GET', 'POST'])
 def diplay():
     title = "You can see your graph"

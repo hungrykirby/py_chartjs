@@ -28,14 +28,16 @@ const my_func = function(d) {
 const my_cal = function(data){
   const d = JSON.parse(data);
   const d_a = d.date_answer
-  //console.log(d.date_answer);
-  //console.log(d.date_answer[1]);
-  //console.log(d.date_answer[2]);
   $(document).ready(function() {
 
     $('#calender').fullCalendar({
       dayClick: function(date, jsEvent, view) {
-        $(this).css('background-color', 'red');
+        for(var i = 0; i < d_a[1].length; i++){
+          if(d_a[0][i] == date.format('YYYY-MM-DD')){
+            alert(d_a[1][i])
+          }
+        }
+        //$(this).css('background-color', 'red');
       },
       dayRender: function (date, cell) {
         for(var i = 0; i < d_a[1].length; i++){
